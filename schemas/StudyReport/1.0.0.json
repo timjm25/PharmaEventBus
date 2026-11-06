@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:cdmo-agent-contracts:StudyReport:1.0.0",
+  "title": "Study report",
+  "description": "A study (in vitro, in vivo, tox, CMC development or clinical) reports its outcome for an asset. Validators check end_date >= start_date.",
+  "x-contract-version": "1.0.0",
+  "type": "object",
+  "required": [
+    "report_id",
+    "asset_id",
+    "study_id",
+    "study_kind",
+    "title",
+    "status",
+    "start_date",
+    "conclusion",
+    "issued_at"
+  ],
+  "properties": {
+    "report_id": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/identifier"
+    },
+    "asset_id": {
+      "$ref": "urn:cdmo-agent-contracts:PharmaCommon:1.0.0#/$defs/assetId"
+    },
+    "study_id": {
+      "$ref": "urn:cdmo-agent-contracts:PharmaCommon:1.0.0#/$defs/studyId"
+    },
+    "indication_id": {
+      "$ref": "urn:cdmo-agent-contracts:PharmaCommon:1.0.0#/$defs/indicationId"
+    },
+    "study_kind": {
+      "$ref": "urn:cdmo-agent-contracts:PharmaCommon:1.0.0#/$defs/studyKind"
+    },
+    "phase": {
+      "$ref": "urn:cdmo-agent-contracts:PharmaCommon:1.0.0#/$defs/studyPhase"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 300
+    },
+    "partner_id": {
+      "$ref": "urn:cdmo-agent-contracts:PharmaCommon:1.0.0#/$defs/partnerId"
+    },
+    "glp": {
+      "type": "boolean",
+      "description": "Run under GLP (21 CFR 58)."
+    },
+    "nct_id": {
+      "type": "string",
+      "pattern": "^NCT\\d{8}$"
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "final",
+        "amended"
+      ]
+    },
+    "start_date": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/date"
+    },
+    "end_date": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/date"
+    },
+    "outcome": {
+      "enum": [
+        "met_objectives",
+        "partially_met",
+        "not_met",
+        "inconclusive",
+        "terminated"
+      ]
+    },
+    "conclusion": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 5000
+    },
+    "key_findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "finding"
+        ],
+        "properties": {
+          "finding": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "significance": {
+            "enum": [
+              "positive",
+              "neutral",
+              "negative",
+              "safety_signal"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "patternProperties": {
+          "^x-": {}
+        }
+      }
+    },
+    "assay_result_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/identifier"
+      }
+    },
+    "documents": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/attachment"
+      }
+    },
+    "issued_at": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/timestamp"
+    },
+    "issued_by": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/person"
+    },
+    "signatures": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/signature"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "patternProperties": {
+    "^x-": {}
+  }
+}

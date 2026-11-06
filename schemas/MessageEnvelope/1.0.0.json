@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:cdmo-agent-contracts:MessageEnvelope:1.0.0",
+  "title": "Message envelope",
+  "description": "Wrapper every agent-to-agent message travels in. The payload is validated against message_type at schema_version.",
+  "x-contract-version": "1.0.0",
+  "type": "object",
+  "required": [
+    "message_id",
+    "message_type",
+    "schema_version",
+    "source_agent",
+    "sent_at",
+    "payload"
+  ],
+  "properties": {
+    "message_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "message_type": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Za-z0-9]+$",
+      "description": "Contract name of the payload, e.g. DeviationReport."
+    },
+    "schema_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Exact contract version the payload follows."
+    },
+    "source_agent": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/agentId"
+    },
+    "target_agent": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/agentId"
+    },
+    "correlation_id": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/identifier"
+    },
+    "causation_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "sent_at": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/timestamp"
+    },
+    "gxp_relevant": {
+      "type": "boolean",
+      "default": false
+    },
+    "payload": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "patternProperties": {
+    "^x-": {}
+  }
+}

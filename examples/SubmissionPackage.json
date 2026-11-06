@@ -1,0 +1,30 @@
+{
+  "package_id": "EXAMPLE-PKG-0001",
+  "asset_id": "AST-000001",
+  "submission_id": "SUB-000001",
+  "indication_id": "IND-000001",
+  "kind": "pre_ind",
+  "agency": "FDA",
+  "status": "planned",
+  "target_date": "2027-02-15",
+  "sections": [
+    {
+      "section_id": "PREIND-Q-CMC",
+      "title": "CMC questions: comparability strategy for donor-derived starting material",
+      "status": "drafting"
+    },
+    {
+      "section_id": "PREIND-Q-NONCLIN",
+      "title": "Nonclinical questions: adequacy of NSG model for GvHD risk",
+      "status": "in_review",
+      "source_report_ids": [
+        "EXAMPLE-SR-0001"
+      ]
+    }
+  ],
+  "prepared_at": "2026-11-04T12:00:00Z",
+  "prepared_by": {
+    "id": "EXAMPLE-REG-1",
+    "role": "Regulatory Affairs Lead"
+  }
+}

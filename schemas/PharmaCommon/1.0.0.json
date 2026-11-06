@@ -1,0 +1,207 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:cdmo-agent-contracts:PharmaCommon:1.0.0",
+  "title": "Pharma common definitions",
+  "description": "Shared $defs for the sponsor-side (virtual pharma) contracts. Builds on Common 1.0.0; not a message.",
+  "x-contract-version": "1.0.0",
+  "$defs": {
+    "assetId": {
+      "type": "string",
+      "pattern": "^AST-\\d{6}$",
+      "description": "Permanent Asset ID carried from target to deal, e.g. AST-000001."
+    },
+    "canonicalId": {
+      "type": "string",
+      "pattern": "^(TGT|AST|IND|STY|BCH|SUB|DEL|PTN|IPR)-\\d{6}$",
+      "description": "Any canonical platform id: TGT target, AST asset, IND indication, STY study, BCH batch, SUB submission, DEL deal, PTN partner, IPR IP reference."
+    },
+    "targetId": {
+      "type": "string",
+      "pattern": "^TGT-\\d{6}$",
+      "description": "Canonical target id, e.g. TGT-000001."
+    },
+    "indicationId": {
+      "type": "string",
+      "pattern": "^IND-\\d{6}$",
+      "description": "Canonical indication id, e.g. IND-000001."
+    },
+    "studyId": {
+      "type": "string",
+      "pattern": "^STY-\\d{6}$",
+      "description": "Canonical study id, e.g. STY-000001."
+    },
+    "batchId": {
+      "type": "string",
+      "pattern": "^BCH-\\d{6}$",
+      "description": "Canonical batch id, e.g. BCH-000001."
+    },
+    "submissionId": {
+      "type": "string",
+      "pattern": "^SUB-\\d{6}$",
+      "description": "Canonical submission / filing / designation id, e.g. SUB-000001."
+    },
+    "dealId": {
+      "type": "string",
+      "pattern": "^DEL-\\d{6}$",
+      "description": "Canonical deal id, e.g. DEL-000001."
+    },
+    "partnerId": {
+      "type": "string",
+      "pattern": "^PTN-\\d{6}$",
+      "description": "Canonical partner (CRO, CDMO, licensee ...) id, e.g. PTN-000001."
+    },
+    "ipRefId": {
+      "type": "string",
+      "pattern": "^IPR-\\d{6}$",
+      "description": "Canonical IP reference id, e.g. IPR-000001."
+    },
+    "assetStage": {
+      "enum": [
+        "discovery",
+        "lead_optimization",
+        "candidate",
+        "ind_enabling",
+        "ind_filed",
+        "phase1",
+        "phase2",
+        "phase3",
+        "filed",
+        "approved",
+        "terminated"
+      ]
+    },
+    "sponsorModality": {
+      "description": "Common 1.0.0 modality plus sponsor-side extras. Extras map to 'other' in CDMOAgentContracts manufacturing messages.",
+      "anyOf": [
+        {
+          "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/modality"
+        },
+        {
+          "enum": [
+            "small_molecule",
+            "oligonucleotide",
+            "peptide"
+          ]
+        }
+      ]
+    },
+    "studyKind": {
+      "enum": [
+        "in_vitro",
+        "in_vivo",
+        "tox",
+        "cmc_development",
+        "clinical"
+      ]
+    },
+    "studyPhase": {
+      "enum": [
+        "preclinical",
+        "phase1",
+        "phase2",
+        "phase3"
+      ]
+    },
+    "submissionKind": {
+      "enum": [
+        "pre_ind",
+        "ind",
+        "cta",
+        "bla",
+        "nda",
+        "maa",
+        "designation"
+      ]
+    },
+    "agency": {
+      "enum": [
+        "FDA",
+        "EMA",
+        "MHRA",
+        "PMDA",
+        "NMPA",
+        "other"
+      ]
+    },
+    "designation": {
+      "enum": [
+        "orphan",
+        "rmat",
+        "breakthrough",
+        "fast_track",
+        "priority_review"
+      ]
+    },
+    "submissionStatus": {
+      "enum": [
+        "planned",
+        "submitted",
+        "accepted",
+        "granted",
+        "approved",
+        "rejected",
+        "withdrawn"
+      ]
+    },
+    "dealType": {
+      "enum": [
+        "license_out",
+        "license_in",
+        "co_development",
+        "option",
+        "acquisition",
+        "cdmo_supply",
+        "cro_service"
+      ]
+    },
+    "dealStatus": {
+      "enum": [
+        "exploring",
+        "term_sheet",
+        "signed",
+        "terminated"
+      ]
+    },
+    "probability": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "percent": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "money": {
+      "type": "object",
+      "required": [
+        "value",
+        "currency",
+        "units"
+      ],
+      "properties": {
+        "value": {
+          "type": "number"
+        },
+        "currency": {
+          "type": "string",
+          "pattern": "^[A-Z]{3}$",
+          "description": "ISO 4217 code; platform default USD."
+        },
+        "units": {
+          "enum": [
+            "units",
+            "thousands",
+            "millions",
+            "billions"
+          ],
+          "description": "Platform default millions."
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {}
+      }
+    }
+  }
+}

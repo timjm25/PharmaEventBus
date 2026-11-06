@@ -1,0 +1,58 @@
+{
+  "message_id": "00000003-1111-4000-8000-000000000003",
+  "message_type": "StudyReport",
+  "schema_version": "1.0.0",
+  "source_agent": "cro-portal",
+  "correlation_id": "AST-000001",
+  "sent_at": "2026-10-01T09:00:10Z",
+  "gxp_relevant": true,
+  "payload": {
+    "report_id": "EXAMPLE-SR-0001",
+    "asset_id": "AST-000001",
+    "study_id": "STY-000002",
+    "indication_id": "IND-000001",
+    "study_kind": "in_vivo",
+    "phase": "preclinical",
+    "title": "EXAMPLE NSG xenograft efficacy and GvHD study of EX-101",
+    "partner_id": "PTN-000001",
+    "glp": false,
+    "status": "final",
+    "start_date": "2026-06-01",
+    "end_date": "2026-09-15",
+    "outcome": "met_objectives",
+    "conclusion": "EXAMPLE: dose-dependent tumour clearance at 5e6 and 1e7 cells; no clinical or histological GvHD to day 90.",
+    "key_findings": [
+      {
+        "finding": "Complete responses in 8/10 animals at the high dose",
+        "significance": "positive"
+      },
+      {
+        "finding": "No GvHD by clinical score or histology",
+        "significance": "positive"
+      }
+    ],
+    "assay_result_ids": [
+      "EXAMPLE-AR-0001"
+    ],
+    "documents": [
+      {
+        "uri": "https://example.invalid/reports/EXAMPLE-SR-0001.pdf",
+        "title": "Final report",
+        "media_type": "application/pdf"
+      }
+    ],
+    "issued_at": "2026-10-01T09:00:00Z",
+    "issued_by": {
+      "id": "EXAMPLE-CRO-SD",
+      "role": "Study Director"
+    },
+    "signatures": [
+      {
+        "signer_id": "EXAMPLE-CRO-SD",
+        "signer_name": "EXAMPLE-CRO-SD (EXAMPLE)",
+        "meaning": "authored",
+        "signed_at": "2026-10-01T09:00:00Z"
+      }
+    ]
+  }
+}

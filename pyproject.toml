@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pharma-event-bus"
+version = "0.1.0"
+description = "Sponsor-side (virtual pharma) contracts on CDMOAgentContracts plus a durable publish/subscribe event bus"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["jsonschema>=4.18", "referencing>=0.28", "flask>=3.0"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+redis = ["redis>=5"]
+
+[project.scripts]
+pharma-bus = "pharma_bus.cli:main"
+
+[tool.setuptools]
+# Schemas and examples stay at the repo root (language-neutral, same layout as
+# CDMOAgentContracts) and ship inside the wheel as pharma_bus/_schemas and _examples.
+packages = ["pharma_bus", "pharma_bus.flows", "pharma_bus._schemas", "pharma_bus._examples"]
+
+[tool.setuptools.package-dir]
+pharma_bus = "pharma_bus"
+"pharma_bus._schemas" = "schemas"
+"pharma_bus._examples" = "examples"
+
+[tool.setuptools.package-data]
+"pharma_bus._schemas" = ["*/*.json"]
+"pharma_bus._examples" = ["*.json", "messages/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

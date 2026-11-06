@@ -1,0 +1,23 @@
+# Agent-capability descriptor (portfolio-agent scaffold format).
+capability: pharma-event-bus
+canonical_repo: timjm25/PharmaEventBus
+agent: shared-tool
+gxp: true
+
+invocation:
+  mode: api_service
+  entrypoint: pharma_bus.http:create_app
+  openapi: /openapi.json
+
+# Contract messages this service carries. It stores and routes them; the
+# publishing tools own their content.
+entities:
+  reads: [CandidateNomination, AssayResult, StudyReport, StageGateDecision, SubmissionPackage,
+          ValuationSnapshot, PartnerDeliverable, DealTerms, BatchRecord, DeviationReport,
+          ReleaseRequest, ReleaseDecision, CapacityRequest, CapacityResponse]
+  writes: [CapacityRequest]
+
+skill: null
+
+depends_on:
+  - gxp-audit-platform

@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:cdmo-agent-contracts:CapacityRequest:1.0.0",
+  "title": "Capacity request",
+  "description": "Ask a site / scheduling agent for suite capacity in a window. Dates are inclusive; validators check earliest_start <= latest_end.",
+  "x-contract-version": "1.0.0",
+  "type": "object",
+  "required": [
+    "request_id",
+    "requested_by",
+    "modality",
+    "process_type",
+    "batches",
+    "earliest_start",
+    "latest_end"
+  ],
+  "properties": {
+    "request_id": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/identifier"
+    },
+    "requested_by": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/agentId"
+    },
+    "client_id": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/identifier"
+    },
+    "program_id": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/identifier"
+    },
+    "modality": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/modality"
+    },
+    "process_type": {
+      "enum": [
+        "upstream",
+        "downstream",
+        "fill_finish",
+        "full_process",
+        "analytical",
+        "tech_transfer",
+        "engineering_run"
+      ]
+    },
+    "phase": {
+      "enum": [
+        "preclinical",
+        "phase_1",
+        "phase_2",
+        "phase_3",
+        "commercial"
+      ]
+    },
+    "suite_requirements": {
+      "type": "object",
+      "required": [],
+      "properties": {
+        "cleanroom_grade": {
+          "enum": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "CNC"
+          ]
+        },
+        "biosafety_level": {
+          "enum": [
+            "BSL-1",
+            "BSL-2",
+            "BSL-3"
+          ]
+        },
+        "isolator_required": {
+          "type": "boolean"
+        },
+        "min_area_m2": {
+          "type": "number",
+          "minimum": 0
+        },
+        "single_use": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {}
+      }
+    },
+    "scale": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/quantity"
+    },
+    "batches": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "duration_days_per_batch": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "earliest_start": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/date"
+    },
+    "latest_end": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/date"
+    },
+    "preferred_site_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/identifier"
+      }
+    },
+    "priority": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/priority"
+    },
+    "notes": {
+      "type": "string",
+      "maxLength": 5000
+    }
+  },
+  "additionalProperties": false,
+  "patternProperties": {
+    "^x-": {}
+  }
+}

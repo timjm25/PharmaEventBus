@@ -1,0 +1,200 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:cdmo-agent-contracts:CandidateNomination:1.0.0",
+  "title": "Candidate nomination",
+  "description": "A development candidate is nominated for an asset: what it is, why, the target IND date and the tox / GMP material it will need. Starts the candidate -> CMC plan flow.",
+  "x-contract-version": "1.0.0",
+  "type": "object",
+  "required": [
+    "nomination_id",
+    "asset_id",
+    "asset_name",
+    "modality",
+    "stage",
+    "nominated_at",
+    "nominated_by",
+    "rationale",
+    "target_ind_date",
+    "planned_batches"
+  ],
+  "properties": {
+    "nomination_id": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/identifier"
+    },
+    "asset_id": {
+      "$ref": "urn:cdmo-agent-contracts:PharmaCommon:1.0.0#/$defs/assetId"
+    },
+    "asset_name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "code_name": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "target_id": {
+      "$ref": "urn:cdmo-agent-contracts:PharmaCommon:1.0.0#/$defs/targetId"
+    },
+    "lead_indication_id": {
+      "$ref": "urn:cdmo-agent-contracts:PharmaCommon:1.0.0#/$defs/indicationId"
+    },
+    "indication_name": {
+      "type": "string",
+      "maxLength": 200
+    },
+    "modality": {
+      "$ref": "urn:cdmo-agent-contracts:PharmaCommon:1.0.0#/$defs/sponsorModality"
+    },
+    "stage": {
+      "$ref": "urn:cdmo-agent-contracts:PharmaCommon:1.0.0#/$defs/assetStage",
+      "description": "Asset stage the nomination moves the asset into (normally 'candidate')."
+    },
+    "nominated_at": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/timestamp"
+    },
+    "nominated_by": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/person"
+    },
+    "rationale": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 5000
+    },
+    "target_product_profile": {
+      "type": "object",
+      "required": [],
+      "properties": {
+        "route_of_administration": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "dosage_form": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "target_dose": {
+          "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/quantity"
+        },
+        "dosing_regimen": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "patient_population": {
+          "type": "string",
+          "maxLength": 500
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {}
+      }
+    },
+    "target_ind_date": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/date",
+      "description": "Date the sponsor aims to file the IND / CTA; CMC windows are planned backwards from it."
+    },
+    "planned_batches": {
+      "type": "object",
+      "required": [
+        "tox",
+        "gmp_clinical"
+      ],
+      "properties": {
+        "engineering": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "tox": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "gmp_clinical": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {}
+      },
+      "description": "Batches the IND-enabling programme needs. At least one tox or GMP batch is required (validator rule)."
+    },
+    "cmc_requirements": {
+      "type": "object",
+      "required": [],
+      "properties": {
+        "process_readiness": {
+          "enum": [
+            "no_process",
+            "research_process",
+            "defined_process"
+          ],
+          "description": "defined_process = a transferable process exists (CDMO tech transfer); otherwise full process development."
+        },
+        "scale": {
+          "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/quantity"
+        },
+        "duration_days_per_batch": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "cleanroom_grade": {
+          "enum": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "CNC"
+          ]
+        },
+        "biosafety_level": {
+          "enum": [
+            "BSL-1",
+            "BSL-2",
+            "BSL-3"
+          ]
+        },
+        "preferred_partner_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:cdmo-agent-contracts:PharmaCommon:1.0.0#/$defs/partnerId"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {}
+      }
+    },
+    "supporting_study_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:cdmo-agent-contracts:PharmaCommon:1.0.0#/$defs/studyId"
+      }
+    },
+    "priority": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/priority"
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/attachment"
+      }
+    },
+    "signatures": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/signature"
+      }
+    },
+    "notes": {
+      "type": "string",
+      "maxLength": 5000
+    }
+  },
+  "additionalProperties": false,
+  "patternProperties": {
+    "^x-": {}
+  }
+}

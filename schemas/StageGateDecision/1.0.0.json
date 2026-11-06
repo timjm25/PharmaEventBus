@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:cdmo-agent-contracts:StageGateDecision:1.0.0",
+  "title": "Stage-gate decision",
+  "description": "Governance decision to move an asset between stages. go / conditional_go needs at least one signature with meaning 'approved' (validator rule). Field list fixed by CONVENTIONS.md.",
+  "x-contract-version": "1.0.0",
+  "type": "object",
+  "required": [
+    "asset_id",
+    "gate_id",
+    "from_stage",
+    "to_stage",
+    "decision",
+    "score",
+    "criteria",
+    "decided_by",
+    "signatures",
+    "decided_at"
+  ],
+  "properties": {
+    "asset_id": {
+      "$ref": "urn:cdmo-agent-contracts:PharmaCommon:1.0.0#/$defs/assetId"
+    },
+    "gate_id": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/identifier"
+    },
+    "from_stage": {
+      "$ref": "urn:cdmo-agent-contracts:PharmaCommon:1.0.0#/$defs/assetStage"
+    },
+    "to_stage": {
+      "$ref": "urn:cdmo-agent-contracts:PharmaCommon:1.0.0#/$defs/assetStage"
+    },
+    "decision": {
+      "enum": [
+        "go",
+        "no_go",
+        "hold",
+        "conditional_go"
+      ]
+    },
+    "score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "criteria": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "criterion_id",
+          "label",
+          "met"
+        ],
+        "properties": {
+          "criterion_id": {
+            "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/identifier"
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          },
+          "met": {
+            "type": "boolean"
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1000
+            }
+          }
+        },
+        "additionalProperties": false,
+        "patternProperties": {
+          "^x-": {}
+        }
+      },
+      "minItems": 1
+    },
+    "decided_by": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/person"
+    },
+    "signatures": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/signature"
+      }
+    },
+    "decided_at": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/timestamp"
+    },
+    "run_id": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/identifier",
+      "description": "ProgramDirectorAgent run that produced the recommendation, if any."
+    },
+    "notes": {
+      "type": "string",
+      "maxLength": 5000
+    }
+  },
+  "additionalProperties": false,
+  "patternProperties": {
+    "^x-": {}
+  }
+}

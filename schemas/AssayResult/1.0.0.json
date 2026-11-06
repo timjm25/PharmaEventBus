@@ -1,0 +1,162 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:cdmo-agent-contracts:AssayResult:1.0.0",
+  "title": "Assay result",
+  "description": "One assay readout for an asset (discovery screen, potency, PK, release test ...), from a LIMS, an ELN or a CRO.",
+  "x-contract-version": "1.0.0",
+  "type": "object",
+  "required": [
+    "result_id",
+    "asset_id",
+    "assay_type",
+    "endpoint",
+    "result",
+    "performed_at",
+    "status"
+  ],
+  "properties": {
+    "result_id": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/identifier"
+    },
+    "asset_id": {
+      "$ref": "urn:cdmo-agent-contracts:PharmaCommon:1.0.0#/$defs/assetId"
+    },
+    "study_id": {
+      "$ref": "urn:cdmo-agent-contracts:PharmaCommon:1.0.0#/$defs/studyId"
+    },
+    "batch_id": {
+      "$ref": "urn:cdmo-agent-contracts:PharmaCommon:1.0.0#/$defs/batchId"
+    },
+    "sample_id": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/identifier"
+    },
+    "assay_id": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/identifier"
+    },
+    "assay_type": {
+      "enum": [
+        "binding",
+        "potency",
+        "cell_viability",
+        "cytotoxicity",
+        "pk",
+        "adme",
+        "toxicology",
+        "identity",
+        "purity",
+        "titer",
+        "vcn",
+        "sterility",
+        "endotoxin",
+        "mycoplasma",
+        "other"
+      ]
+    },
+    "method": {
+      "type": "string",
+      "maxLength": 200
+    },
+    "endpoint": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "description": "What was measured, e.g. IC50, EC50, % lysis, vector copy number."
+    },
+    "result": {
+      "type": "object",
+      "required": [
+        "value",
+        "unit"
+      ],
+      "properties": {
+        "value": {
+          "type": "number"
+        },
+        "unit": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 32
+        },
+        "qualifier": {
+          "enum": [
+            "=",
+            "<",
+            ">",
+            "<=",
+            ">="
+          ],
+          "default": "="
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {}
+      }
+    },
+    "replicates": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "cv_pct": {
+      "type": "number",
+      "minimum": 0
+    },
+    "acceptance": {
+      "type": "object",
+      "required": [
+        "criterion",
+        "met"
+      ],
+      "properties": {
+        "criterion": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "met": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {}
+      }
+    },
+    "performed_at": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/timestamp"
+    },
+    "performed_by": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/person"
+    },
+    "lab_partner_id": {
+      "$ref": "urn:cdmo-agent-contracts:PharmaCommon:1.0.0#/$defs/partnerId"
+    },
+    "instrument_id": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/identifier"
+    },
+    "source_system": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/identifier"
+    },
+    "status": {
+      "enum": [
+        "preliminary",
+        "final",
+        "invalidated"
+      ]
+    },
+    "raw_data": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/attachment"
+      }
+    },
+    "notes": {
+      "type": "string",
+      "maxLength": 5000
+    }
+  },
+  "additionalProperties": false,
+  "patternProperties": {
+    "^x-": {}
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "repo": "timjm25/CDMOAgentContracts",
+  "commit": "8c7bf2c",
+  "source_dir": "schemas",
+  "files": {
+    "Common/1.0.0.json": "31f8fcb2e0c60f9c2bee6a9aae53e72a79ce7974c2e24a8bba55fb7e9240713d",
+    "MessageEnvelope/1.0.0.json": "89eb40c0994e521d9c889352079d3e1bb1c2e60014d59b7e736207a8db9dea5b",
+    "CapacityRequest/1.0.0.json": "0317961f4777046db3c01c7c655acaa935d9ff19c2f163508e237bb8f3801640"
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:cdmo-agent-contracts:SubmissionPackage:1.0.0",
+  "title": "Submission package",
+  "description": "A regulatory package (pre-IND, IND, CTA, BLA, NDA, MAA or designation request) and the state of its sections. Validators check decision_date >= submitted_date and that a submitted package has a submitted_date.",
+  "x-contract-version": "1.0.0",
+  "type": "object",
+  "required": [
+    "package_id",
+    "asset_id",
+    "submission_id",
+    "kind",
+    "agency",
+    "status",
+    "sections",
+    "prepared_at"
+  ],
+  "properties": {
+    "package_id": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/identifier"
+    },
+    "asset_id": {
+      "$ref": "urn:cdmo-agent-contracts:PharmaCommon:1.0.0#/$defs/assetId"
+    },
+    "submission_id": {
+      "$ref": "urn:cdmo-agent-contracts:PharmaCommon:1.0.0#/$defs/submissionId"
+    },
+    "indication_id": {
+      "$ref": "urn:cdmo-agent-contracts:PharmaCommon:1.0.0#/$defs/indicationId"
+    },
+    "kind": {
+      "$ref": "urn:cdmo-agent-contracts:PharmaCommon:1.0.0#/$defs/submissionKind"
+    },
+    "agency": {
+      "$ref": "urn:cdmo-agent-contracts:PharmaCommon:1.0.0#/$defs/agency"
+    },
+    "designation": {
+      "$ref": "urn:cdmo-agent-contracts:PharmaCommon:1.0.0#/$defs/designation"
+    },
+    "status": {
+      "$ref": "urn:cdmo-agent-contracts:PharmaCommon:1.0.0#/$defs/submissionStatus"
+    },
+    "target_date": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/date"
+    },
+    "submitted_date": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/date"
+    },
+    "decision_date": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/date"
+    },
+    "sections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "section_id",
+          "title",
+          "status"
+        ],
+        "properties": {
+          "section_id": {
+            "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/identifier",
+            "description": "CTD section, e.g. 3.2.S.2 or 2.6.6."
+          },
+          "module": {
+            "enum": [
+              "m1",
+              "m2",
+              "m3",
+              "m4",
+              "m5"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          },
+          "status": {
+            "enum": [
+              "not_started",
+              "drafting",
+              "in_review",
+              "final"
+            ]
+          },
+          "source_report_ids": {
+            "type": "array",
+            "items": {
+              "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/identifier"
+            }
+          },
+          "document": {
+            "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/attachment"
+          }
+        },
+        "additionalProperties": false,
+        "patternProperties": {
+          "^x-": {}
+        }
+      },
+      "minItems": 1
+    },
+    "prepared_at": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/timestamp"
+    },
+    "prepared_by": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/person"
+    },
+    "signatures": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/signature"
+      }
+    },
+    "notes": {
+      "type": "string",
+      "maxLength": 5000
+    }
+  },
+  "additionalProperties": false,
+  "patternProperties": {
+    "^x-": {}
+  }
+}

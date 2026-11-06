@@ -1,0 +1,34 @@
+{
+  "message_id": "00000007-1111-4000-8000-000000000007",
+  "message_type": "PartnerDeliverable",
+  "schema_version": "1.0.0",
+  "source_agent": "document-ingestion",
+  "correlation_id": "AST-000001",
+  "sent_at": "2026-10-01T09:06:00Z",
+  "gxp_relevant": false,
+  "payload": {
+    "deliverable_id": "EXAMPLE-DLV-0001",
+    "asset_id": "AST-000001",
+    "partner_id": "PTN-000001",
+    "deliverable_type": "study_report",
+    "title": "EXAMPLE final report, NSG xenograft efficacy and GvHD study",
+    "study_id": "STY-000002",
+    "contract_ref": "EXAMPLE-SOW-0007",
+    "status": "received",
+    "due_date": "2026-10-01",
+    "received_at": "2026-10-01T09:05:00Z",
+    "documents": [
+      {
+        "uri": "https://example.invalid/reports/EXAMPLE-SR-0001.pdf",
+        "title": "Final report",
+        "media_type": "application/pdf"
+      }
+    ],
+    "ingestion": {
+      "source_system": "DocumentIngestion",
+      "document_id": "EXAMPLE-DOC-0042",
+      "pages": 64,
+      "fields_extracted": 37
+    }
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:cdmo-agent-contracts:ValuationSnapshot:1.0.0",
+  "title": "Valuation snapshot",
+  "description": "Point-in-time risk-adjusted valuation of an asset (USD millions). Field list fixed by CONVENTIONS.md.",
+  "x-contract-version": "1.0.0",
+  "type": "object",
+  "required": [
+    "asset_id",
+    "as_of",
+    "currency",
+    "units",
+    "rnpv",
+    "npv_unrisked",
+    "cumulative_pos",
+    "peak_sales_millions",
+    "discount_rate",
+    "years_to_launch",
+    "method"
+  ],
+  "properties": {
+    "asset_id": {
+      "$ref": "urn:cdmo-agent-contracts:PharmaCommon:1.0.0#/$defs/assetId"
+    },
+    "as_of": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/date"
+    },
+    "currency": {
+      "const": "USD"
+    },
+    "units": {
+      "const": "millions"
+    },
+    "rnpv": {
+      "type": "number"
+    },
+    "npv_unrisked": {
+      "type": "number"
+    },
+    "cumulative_pos": {
+      "$ref": "urn:cdmo-agent-contracts:PharmaCommon:1.0.0#/$defs/probability"
+    },
+    "peak_sales_millions": {
+      "type": "number",
+      "minimum": 0
+    },
+    "discount_rate": {
+      "type": "number",
+      "minimum": 0,
+      "exclusiveMaximum": 1
+    },
+    "years_to_launch": {
+      "type": "number",
+      "minimum": 0
+    },
+    "patent_expiry_year": {
+      "type": "integer",
+      "minimum": 1980,
+      "maximum": 2100
+    },
+    "assumptions": {
+      "type": "object",
+      "description": "Model inputs (phase PoS, launch year, margins ...), free-form."
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "field",
+          "source_system"
+        ],
+        "properties": {
+          "field": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "source_system": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "ref": {
+            "type": "string",
+            "maxLength": 500
+          }
+        },
+        "additionalProperties": false,
+        "patternProperties": {
+          "^x-": {}
+        }
+      }
+    },
+    "method": {
+      "enum": [
+        "rNPV"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "patternProperties": {
+    "^x-": {}
+  }
+}

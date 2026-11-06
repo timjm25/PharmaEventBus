@@ -1,0 +1,58 @@
+{
+  "nomination_id": "EXAMPLE-NOM-0001",
+  "asset_id": "AST-000001",
+  "asset_name": "EXAMPLE EX-101 allogeneic anti-CD19 CAR-T",
+  "code_name": "EX-101",
+  "target_id": "TGT-000001",
+  "lead_indication_id": "IND-000001",
+  "indication_name": "Relapsed / refractory large B-cell lymphoma (EXAMPLE)",
+  "modality": "allogeneic_cell_therapy",
+  "stage": "candidate",
+  "nominated_at": "2026-11-02T15:00:00Z",
+  "nominated_by": {
+    "id": "EXAMPLE-CSO",
+    "name": "EXAMPLE Chief Scientific Officer",
+    "role": "CSO"
+  },
+  "rationale": "EXAMPLE: lead construct shows >80% target-cell lysis at E:T 1:1, no GvHD signal in the NSG model and a 4-week in vitro persistence advantage over the two back-up constructs.",
+  "target_product_profile": {
+    "route_of_administration": "intravenous",
+    "dosage_form": "cryopreserved cell suspension",
+    "target_dose": {
+      "value": 300,
+      "unit": "million cells"
+    },
+    "patient_population": "3L+ r/r LBCL, autologous CAR-T ineligible or relapsed"
+  },
+  "target_ind_date": "2028-03-31",
+  "planned_batches": {
+    "engineering": 2,
+    "tox": 1,
+    "gmp_clinical": 2
+  },
+  "cmc_requirements": {
+    "process_readiness": "research_process",
+    "scale": {
+      "value": 50,
+      "unit": "L"
+    },
+    "cleanroom_grade": "B",
+    "biosafety_level": "BSL-2",
+    "preferred_partner_ids": [
+      "PTN-000002"
+    ]
+  },
+  "supporting_study_ids": [
+    "STY-000001",
+    "STY-000002"
+  ],
+  "priority": 2,
+  "signatures": [
+    {
+      "signer_id": "EXAMPLE-CSO",
+      "signer_name": "EXAMPLE-CSO (EXAMPLE)",
+      "meaning": "approved",
+      "signed_at": "2026-11-02T15:00:00Z"
+    }
+  ]
+}

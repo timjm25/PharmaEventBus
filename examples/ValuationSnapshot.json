@@ -1,0 +1,38 @@
+{
+  "asset_id": "AST-000001",
+  "as_of": "2026-11-05",
+  "currency": "USD",
+  "units": "millions",
+  "rnpv": 142.6,
+  "npv_unrisked": 1180.0,
+  "cumulative_pos": 0.121,
+  "peak_sales_millions": 850.0,
+  "discount_rate": 0.12,
+  "years_to_launch": 6.5,
+  "patent_expiry_year": 2043,
+  "assumptions": {
+    "launch_year": 2033,
+    "phase_pos": {
+      "preclinical": 0.6,
+      "phase_1": 0.55,
+      "phase_2": 0.4,
+      "phase_3": 0.6,
+      "filing": 0.92
+    },
+    "cogs_pct": 0.3,
+    "note": "EXAMPLE"
+  },
+  "sources": [
+    {
+      "field": "peak_sales_millions",
+      "source_system": "AssetProgramRegistry",
+      "ref": "IND-000001"
+    },
+    {
+      "field": "cumulative_pos",
+      "source_system": "thesis-generator",
+      "ref": "valuation.cumulative_pos"
+    }
+  ],
+  "method": "rNPV"
+}

@@ -1,0 +1,64 @@
+{
+  "message_id": "00000004-1111-4000-8000-000000000004",
+  "message_type": "StageGateDecision",
+  "schema_version": "1.0.0",
+  "source_agent": "program-director",
+  "correlation_id": "AST-000001",
+  "sent_at": "2026-11-05T17:00:05Z",
+  "gxp_relevant": true,
+  "payload": {
+    "asset_id": "AST-000001",
+    "gate_id": "EXAMPLE-GATE-CAND-TO-INDE",
+    "from_stage": "candidate",
+    "to_stage": "ind_enabling",
+    "decision": "go",
+    "score": 78,
+    "criteria": [
+      {
+        "criterion_id": "EFF-1",
+        "label": "In vivo efficacy at clinically relevant dose",
+        "met": true,
+        "evidence": [
+          "EXAMPLE-SR-0001"
+        ]
+      },
+      {
+        "criterion_id": "SAF-1",
+        "label": "No GvHD signal",
+        "met": true,
+        "evidence": [
+          "EXAMPLE-SR-0001"
+        ]
+      },
+      {
+        "criterion_id": "CMC-1",
+        "label": "CDMO capacity secured for tox and GMP batches",
+        "met": false,
+        "evidence": []
+      }
+    ],
+    "decided_by": {
+      "id": "EXAMPLE-PORTFOLIO-COMMITTEE",
+      "name": "EXAMPLE Portfolio Committee",
+      "role": "Governance"
+    },
+    "signatures": [
+      {
+        "signer_id": "EXAMPLE-CEO",
+        "signer_name": "EXAMPLE-CEO (EXAMPLE)",
+        "meaning": "approved",
+        "signed_at": "2026-11-05T17:00:00Z"
+      },
+      {
+        "signer_id": "EXAMPLE-CSO",
+        "signer_name": "EXAMPLE-CSO (EXAMPLE)",
+        "meaning": "reviewed",
+        "signed_at": "2026-11-05T16:30:00Z"
+      }
+    ],
+    "decided_at": "2026-11-05T17:00:00Z",
+    "run_id": "EXAMPLE-RUN-0001",
+    "notes": "EXAMPLE: go, with CMC-1 to be closed before the first tox batch."
+  },
+  "target_agent": "program-delay-predictor"
+}

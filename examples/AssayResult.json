@@ -1,0 +1,29 @@
+{
+  "result_id": "EXAMPLE-AR-0001",
+  "asset_id": "AST-000001",
+  "study_id": "STY-000001",
+  "sample_id": "EXAMPLE-SMP-0001",
+  "assay_id": "EXAMPLE-ASSAY-CYTOTOX-01",
+  "assay_type": "cytotoxicity",
+  "method": "Real-time impedance killing assay, NALM-6 targets",
+  "endpoint": "% specific lysis at 48 h, E:T 1:1",
+  "result": {
+    "value": 82.4,
+    "unit": "%",
+    "qualifier": "="
+  },
+  "replicates": 3,
+  "cv_pct": 6.1,
+  "acceptance": {
+    "criterion": ">= 60% specific lysis",
+    "met": true
+  },
+  "performed_at": "2026-10-14T13:20:00Z",
+  "performed_by": {
+    "id": "EXAMPLE-SCI-3",
+    "role": "Scientist"
+  },
+  "lab_partner_id": "PTN-000001",
+  "source_system": "Laboratory-LIMS",
+  "status": "final"
+}

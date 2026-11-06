@@ -1,0 +1,64 @@
+{
+  "terms_id": "EXAMPLE-TERMS-0001",
+  "asset_id": "AST-000001",
+  "deal_id": "DEL-000001",
+  "partner_id": "PTN-000003",
+  "deal_type": "option",
+  "status": "term_sheet",
+  "upfront": {
+    "value": 25,
+    "currency": "USD",
+    "units": "millions"
+  },
+  "milestones": [
+    {
+      "milestone_id": "M1",
+      "description": "First patient dosed in phase 1",
+      "trigger": "development",
+      "amount": {
+        "value": 40,
+        "currency": "USD",
+        "units": "millions"
+      },
+      "timing_years": 2,
+      "probability": 0.55
+    },
+    {
+      "milestone_id": "M2",
+      "description": "BLA approval",
+      "trigger": "regulatory",
+      "amount": {
+        "value": 150,
+        "currency": "USD",
+        "units": "millions"
+      },
+      "timing_years": 7,
+      "probability": 0.12
+    }
+  ],
+  "royalty_pct": 9,
+  "royalty_tiers": [
+    {
+      "rate_pct": 7
+    },
+    {
+      "from_annual_sales": {
+        "value": 500,
+        "currency": "USD",
+        "units": "millions"
+      },
+      "rate_pct": 11
+    }
+  ],
+  "territory": [
+    "Worldwide ex-China"
+  ],
+  "exclusive": true,
+  "discount_rate": 0.12,
+  "dealsim_name": "EXAMPLE EX-101 option",
+  "proposed_by": {
+    "id": "EXAMPLE-BD-1",
+    "role": "BD Lead"
+  },
+  "as_of": "2026-11-05T10:00:00Z"
+}

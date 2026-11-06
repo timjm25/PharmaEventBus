@@ -1,0 +1,162 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:cdmo-agent-contracts:DealTerms:1.0.0",
+  "title": "Deal terms",
+  "description": "Proposed or agreed economics of a deal on an asset (licence, option, co-development, supply ...). Money in USD millions by default. Validators check expiry_date >= effective_date and that a signed deal has signed_date.",
+  "x-contract-version": "1.0.0",
+  "type": "object",
+  "required": [
+    "terms_id",
+    "asset_id",
+    "deal_id",
+    "partner_id",
+    "deal_type",
+    "status",
+    "upfront",
+    "as_of"
+  ],
+  "properties": {
+    "terms_id": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/identifier"
+    },
+    "asset_id": {
+      "$ref": "urn:cdmo-agent-contracts:PharmaCommon:1.0.0#/$defs/assetId"
+    },
+    "deal_id": {
+      "$ref": "urn:cdmo-agent-contracts:PharmaCommon:1.0.0#/$defs/dealId"
+    },
+    "partner_id": {
+      "$ref": "urn:cdmo-agent-contracts:PharmaCommon:1.0.0#/$defs/partnerId"
+    },
+    "deal_type": {
+      "$ref": "urn:cdmo-agent-contracts:PharmaCommon:1.0.0#/$defs/dealType"
+    },
+    "status": {
+      "$ref": "urn:cdmo-agent-contracts:PharmaCommon:1.0.0#/$defs/dealStatus"
+    },
+    "upfront": {
+      "$ref": "urn:cdmo-agent-contracts:PharmaCommon:1.0.0#/$defs/money"
+    },
+    "milestones": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "description",
+          "trigger",
+          "amount"
+        ],
+        "properties": {
+          "milestone_id": {
+            "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/identifier"
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "trigger": {
+            "enum": [
+              "development",
+              "regulatory",
+              "commercial"
+            ]
+          },
+          "amount": {
+            "$ref": "urn:cdmo-agent-contracts:PharmaCommon:1.0.0#/$defs/money"
+          },
+          "timing_years": {
+            "type": "number",
+            "minimum": 0
+          },
+          "probability": {
+            "$ref": "urn:cdmo-agent-contracts:PharmaCommon:1.0.0#/$defs/probability"
+          }
+        },
+        "additionalProperties": false,
+        "patternProperties": {
+          "^x-": {}
+        }
+      }
+    },
+    "royalty_pct": {
+      "$ref": "urn:cdmo-agent-contracts:PharmaCommon:1.0.0#/$defs/percent"
+    },
+    "royalty_tiers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "rate_pct"
+        ],
+        "properties": {
+          "from_annual_sales": {
+            "$ref": "urn:cdmo-agent-contracts:PharmaCommon:1.0.0#/$defs/money"
+          },
+          "rate_pct": {
+            "$ref": "urn:cdmo-agent-contracts:PharmaCommon:1.0.0#/$defs/percent"
+          }
+        },
+        "additionalProperties": false,
+        "patternProperties": {
+          "^x-": {}
+        }
+      }
+    },
+    "equity": {
+      "$ref": "urn:cdmo-agent-contracts:PharmaCommon:1.0.0#/$defs/money"
+    },
+    "territory": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 100
+      }
+    },
+    "field_of_use": {
+      "type": "string",
+      "maxLength": 500
+    },
+    "exclusive": {
+      "type": "boolean"
+    },
+    "term_years": {
+      "type": "number",
+      "minimum": 0
+    },
+    "discount_rate": {
+      "type": "number",
+      "minimum": 0,
+      "exclusiveMaximum": 1
+    },
+    "signed_date": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/date"
+    },
+    "effective_date": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/date"
+    },
+    "expiry_date": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/date"
+    },
+    "dealsim_name": {
+      "type": "string",
+      "maxLength": 200,
+      "description": "Deal name in DealStructureSimulator, if modelled there."
+    },
+    "proposed_by": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/person"
+    },
+    "as_of": {
+      "$ref": "urn:cdmo-agent-contracts:Common:1.0.0#/$defs/timestamp"
+    },
+    "notes": {
+      "type": "string",
+      "maxLength": 5000
+    }
+  },
+  "additionalProperties": false,
+  "patternProperties": {
+    "^x-": {}
+  }
+}
